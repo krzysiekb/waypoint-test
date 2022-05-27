@@ -16,7 +16,7 @@ app "example-nginx-sbd" {
 
   build {
     use "docker-pull" {
-      image = "nginx",
+      image = "nginx"
       tag = "latest"
     }
   }
