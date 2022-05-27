@@ -2,6 +2,10 @@ project = "example-nodejs-sbd"
 
 runner {
   profile = "sbd-runner"
+  data_source "git" {
+    url  = "https://github.com/krzysiekb/waypoint-test.git"
+    path = "example-sbd"
+  }
 }
 
 app "example-nodejs-sbd" {
