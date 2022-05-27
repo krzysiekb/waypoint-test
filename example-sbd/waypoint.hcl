@@ -1,4 +1,4 @@
-project = "example-nodejs-sbd"
+project = "example-nginx-sbd"
 
 runner {
   profile = "sbd-runner"
@@ -8,34 +8,29 @@ runner {
   }
 }
 
-app "example-nodejs-sbd" {
+app "example-nginx-sbd" {
   labels = {
-    "service" = "example-nodejs-sbd",
+    "service" = "example-nginx-sbd",
     "env"     = "dev"
   }
 
   build {
-    use "pack" {}
-    registry {
-      use "docker" {
-        image = "example-nodejs"
-        tag   = "1"
-        local = true
-      }
+    use "docker-pull" {
+      image = "nginx"
     }
   }
 
   deploy {
     use "kubernetes" {
+      namespace = "waypoint-sbd"
       probe_path = "/"
     }
   }
 
   release {
     use "kubernetes" {
-      // Sets up a load balancer to access released application
-      load_balancer = true
-      port          = 3000
+      namespace = "waypoint-sbd"
+      port          = 80
     }
   }
 }
